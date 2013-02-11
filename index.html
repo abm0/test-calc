@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>calc</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script type="text/javascript">
+//        function equality()
+//        {
+//            var x = 0;
+//            var y = 0;
+//            var z = 0;
+//            var exp = document.getElementById('exp-input').value;
+//            var arr = exp.split('');
+//            var i = arr.length - 2;
+//            if (arr[i] == '=')
+//                {
+//                    return;
+//                }
+//                if (arr[1] == '+')
+//                    {
+//                        alert(arr[1]);
+//                        var parsed = exp.split('+');
+//                        alert(parsed);
+//                        x = parseInt(parsed[0]);
+//                        y = parseInt(parsed[1]);
+//                        z = x + y;
+//                        alert(z);
+//                    }
+//                else if (arr[1]=='-')
+//                    {
+//                        var parsed = exp.split('-');
+//                        x = parsed[0];
+//                        y = parsed[1];
+//                        z = x - y;
+//                    }
+//                else if (arr[1]=='/')
+//                    {
+//                        var parsed = exp.split('/');
+//                        x = parsed[0];
+//                        y = parsed[1];
+//                        z = x / y;
+//                    }
+//                else if (arr[1]=='*')
+//                    {
+//                        var parsed = exp.split('*');
+//                        x = parsed[0];
+//                        y = parsed[1];
+//                        z = x * y;
+//                    }
+//             
+//        }
+//        function add(sign)
+//        {
+//            document.getElementById('exp-input').value += sign;
+//        }
+        var o;
+        var x;
+        var y;
+        function clean()
+        {
+            document.getElementById('exp-input').value = '';
+        }
+        function add(num)
+        {
+            document.getElementById('exp-input').value += num;
+        }
+        function sign(sig)
+        {
+            o = sig;
+            x = document.getElementById('exp-input').value;
+            document.getElementById('exp-input').value = '';
+        }
+        function calc()
+        {
+            y = document.getElementById('exp-input').value;
+            switch (o)
+            {
+                case '+': document.getElementById('exp-input').value = parseInt(x) + parseInt(y)
+                    break
+                case '-': document.getElementById('exp-input').value = x - y
+                    break
+                case '*': document.getElementById('exp-input').value = x * y
+                    break
+                case '/': document.getElementById('exp-input').value = x / y
+                    break
+            }
+        }
+        </script>
+    </head>
+    <body>
+        <div id="calc-block">
+            <input type="text" id="exp-input" value="0"/>
+            <table id="left-col">
+                <tbody>
+                    <tr>
+                        <td><input type="submit" id="seven" value="7" onclick="add(this.value)" /></td>
+                        <td><input type="submit" id="eight" value="8" onclick="add(this.value)" /></td>
+                        <td><input type="submit" id="nine" value="9" onclick="add(this.value)" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" id="four" value="4" onclick="add(this.value)" /></td>
+                        <td><input type="submit" id="five" value="5" onclick="add(this.value)" /></td>
+                        <td><input type="submit" id="six" value="6" onclick="add(this.value)" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" id="one" value="1" onclick="add(this.value)" /></td>
+                        <td><input type="submit" id="two" value="2" onclick="add(this.value)" /></td>
+                        <td><input type="submit" id="three" value="3" onclick="add(this.value)" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" id="null" class="large" value="0" onclick="add(this.value)" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="right-col">
+                <tbody>
+                    <tr>
+                        <td><input type="submit" id="cancel" value="C" onclick="clean()" /></td>
+                        <td><input type="submit" id="multiply" value="*" onclick="sign(this.value)" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" id="minus" value="-" onclick="sign(this.value)" /></td>
+                        <td><input type="submit" id="divide" value="/" onclick="sign(this.value)" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" id="plus" class="large" value="+" onclick="sign(this.value)" /></td>
+                        <td><input type="submit" id="equal" class="large" value="=" onclick="calc()"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
