@@ -4,128 +4,107 @@
         <title>calc</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
+<!--        <script type="text/javascript" src="http://scriptjava.net/source/scriptjava/scriptjava.js"></script>-->
         <script type="text/javascript">
-//        function equality()
-//        {
-//            var x = 0;
-//            var y = 0;
-//            var z = 0;
-//            var exp = document.getElementById('exp-input').value;
-//            var arr = exp.split('');
-//            var i = arr.length - 2;
-//            if (arr[i] == '=')
-//                {
-//                    return;
-//                }
-//                if (arr[1] == '+')
-//                    {
-//                        alert(arr[1]);
-//                        var parsed = exp.split('+');
-//                        alert(parsed);
-//                        x = parseInt(parsed[0]);
-//                        y = parseInt(parsed[1]);
-//                        z = x + y;
-//                        alert(z);
-//                    }
-//                else if (arr[1]=='-')
-//                    {
-//                        var parsed = exp.split('-');
-//                        x = parsed[0];
-//                        y = parsed[1];
-//                        z = x - y;
-//                    }
-//                else if (arr[1]=='/')
-//                    {
-//                        var parsed = exp.split('/');
-//                        x = parsed[0];
-//                        y = parsed[1];
-//                        z = x / y;
-//                    }
-//                else if (arr[1]=='*')
-//                    {
-//                        var parsed = exp.split('*');
-//                        x = parsed[0];
-//                        y = parsed[1];
-//                        z = x * y;
-//                    }
-//             
-//        }
-//        function add(sign)
-//        {
-//            document.getElementById('exp-input').value += sign;
-//        }
-        var o;
-        var x;
-        var y;
-        function clean()
-        {
-            document.getElementById('exp-input').value = '';
-        }
-        function add(num)
-        {
-            document.getElementById('exp-input').value += num;
-        }
-        function sign(sig)
-        {
-            o = sig;
-            x = document.getElementById('exp-input').value;
-            document.getElementById('exp-input').value = '';
-        }
-        function calc()
-        {
-            y = document.getElementById('exp-input').value;
-            switch (o)
-            {
-                case '+': document.getElementById('exp-input').value = parseInt(x) + parseInt(y)
-                    break
-                case '-': document.getElementById('exp-input').value = x - y
-                    break
-                case '*': document.getElementById('exp-input').value = x * y
-                    break
-                case '/': document.getElementById('exp-input').value = x / y
-                    break
+            function Calculator(outputElement) {
+                this.outputElement = outputElement;
+                this.stack = new Array(0);
+                this.trigger = false;
+
+                this.showResult = function(result) {
+                    this.outputElement.value = result;
+                };
+
+                this.getInputValue = function() {
+                    return this.outputElement.value;
+                };
+
+                this.onOperation = function(operation) {
+                    this.stack.push(this.getInputValue());
+                    this.stack.push(operation);
+                    this.clearInputValue();
+                };
+
+                this.calculate = function() {
+                    while (this.stack.length != 1)
+                    {
+                        var operand1 = this.stack[0];
+                        var operand2 = this.stack[2];
+                        var operation = this.stack[1];
+                        var res;
+                        switch (operation) {
+                            case ("+"): res = parseInt(operand1) + parseInt(operand2); break
+                            case ("-"): res = parseInt(operand1) - parseInt(operand2); break
+                            case ("/"): res = parseInt(operand1) / parseInt(operand2); break
+                            case ("*"): res = parseInt(operand1) * parseInt(operand2); break
+                        }
+                        this.stack.splice(0, 2);
+                        this.stack[0] = res;
+                    }
+                    return this.stack[0];
+                    this.trigger = true;
+                };
+
+                this.clearInputValue = function() {
+                    this.outputElement.value = "";
+                };
+
+                this.onCalculate = function() {
+                    this.stack.push(this.getInputValue());
+                    this.clearInputValue();
+                    this.showResult(this.calculate());
+                    this.stack.splice(0, 1);
+                };
             }
-        }
+//            $$r(function() {
+//                c = new Calculator(document.getElementById('exp-input'), document.getElementById('exp-input2'), document.getElementById('exp-input3'));
+//            });
+            window.onload = function(){
+                c = new Calculator(document.getElementById('exp-input'));
+            }
+            function getValue(value){
+                c.outputElement.value += value;
+            }
         </script>
     </head>
     <body>
-        <div id="calc-block">
-            <input type="text" id="exp-input" value="0"/>
+        <div class="calc-block" id="calc1">
+            <input type="text" id="exp-input" value="" readonly/>
             <table id="left-col">
                 <tbody>
                     <tr>
-                        <td><input type="submit" id="seven" value="7" onclick="add(this.value)" /></td>
-                        <td><input type="submit" id="eight" value="8" onclick="add(this.value)" /></td>
-                        <td><input type="submit" id="nine" value="9" onclick="add(this.value)" /></td>
+                        <td><input type="button" value="7" class="num" onclick="getValue(this.value)" /></td>
+                        <td><input type="button" value="8" class="num" onclick="getValue(this.value)" /></td>
+                        <td><input type="button" value="9" class="num" onclick="getValue(this.value)" /></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" id="four" value="4" onclick="add(this.value)" /></td>
-                        <td><input type="submit" id="five" value="5" onclick="add(this.value)" /></td>
-                        <td><input type="submit" id="six" value="6" onclick="add(this.value)" /></td>
+                        <td><input type="button" value="4" class="num" onclick="getValue(this.value)" /></td>
+                        <td><input type="button" value="5" class="num" onclick="getValue(this.value)" /></td>
+                        <td><input type="button" value="6" class="num" onclick="getValue(this.value)" /></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" id="one" value="1" onclick="add(this.value)" /></td>
-                        <td><input type="submit" id="two" value="2" onclick="add(this.value)" /></td>
-                        <td><input type="submit" id="three" value="3" onclick="add(this.value)" /></td>
+                        <td><input type="button" value="1" class="num" onclick="getValue(this.value)" /></td>
+                        <td><input type="button" value="2" class="num" onclick="getValue(this.value)"/></td>
+                        <td><input type="button" value="3" class="num" onclick="getValue(this.value)" /></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" id="null" class="large" value="0" onclick="add(this.value)" /></td>
+                        <td><input type="button" id="null" class="large" class="num" value="0" onclick="getValue(this.value)" /></td>
                     </tr>
                 </tbody>
             </table>
             <table id="right-col">
                 <tbody>
                     <tr>
-                        <td><input type="submit" id="cancel" value="C" onclick="clean()" /></td>
-                        <td><input type="submit" id="multiply" value="*" onclick="sign(this.value)" /></td>
+                        <td><input type="button" value="C" onclick="c.clearInputValue()"/></td>
+                        <td><input type="button" value="*" onclick="c.onOperation(this.value)" /></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" id="minus" value="-" onclick="sign(this.value)" /></td>
-                        <td><input type="submit" id="divide" value="/" onclick="sign(this.value)" /></td>
+                        <td><input type="button" value="-" onclick="c.onOperation(this.value)" /></td>
+                        <td><input type="button" value="/" onclick="c.onOperation(this.value)" /></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" id="plus" class="large" value="+" onclick="sign(this.value)" /></td>
-                        <td><input type="submit" id="equal" class="large" value="=" onclick="calc()"/></td>
+                        <td><input type="button" class="large" value="+" onclick="c.onOperation(this.value)"/></td>
+                        <td><input type="button" class="large" value="=" onclick="c.onCalculate()"/></td>
                     </tr>
                 </tbody>
             </table>

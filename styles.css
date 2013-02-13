@@ -1,61 +1,79 @@
-#calc-block
-{
-    height: 250px;
-    width: 360px;
+.calc-block{
+    height: 230px;
+    width: 250px;
     padding: 15px;
-}
-
-#exp-input
-{
-    float: left;
-    width: 300px;
-    margin-left: 5px;
-}
-
-table
-{
     float: left;
 }
 
-#left-col
-{
+table{
+    float: left;
+}
+
+#left-col{
     width: 40%;
 }
 
-#left-col tr
-{
+#left-col tr{
     float:left;
 }
 
-#right-col
-{
+#right-col{
     width: 40%;
+    margin-left: 10px;
 }
 
-#right-col tr
-{
+#right-col tr{
     float: left;
 }
 
-input
-{
+input{
     border: none;
+    background-color: #ccccda;
+    outline: none;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    -webkit-transition: all 0.8s 0.1s ease;
+    -moz-transition: all 0.8s 0.1s ease;
+    -o-transition: all 0.8s 0.1s ease-in;
 }
 
-input:not([class='large'])
-{
+input:hover{
+    background-color: red;
+/*    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -opera-transform: rotate(360deg);*/
+}
+
+
+
+input:not([class='large']){
     width: 40px;
     height: 40px;
+    border-radius: 20px;
 }
     
-.large
-{
+.large{
     width: 40px;
     height: 76px;
+    border-radius: 20px;
 }
 
-#null.large
-{
+#null.large{
     width: 127px;
     height: 30px;
+    border-radius: 15px;
+}
+
+body{
+    margin: auto 0;
+}
+
+#exp-input{
+    width: 228px;
+    padding-left: 10px;
+    outline: none;
+    float: left;
+    color: white;
 }
