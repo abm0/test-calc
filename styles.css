@@ -41,9 +41,6 @@ input{
 
 input:hover{
     background-color: red;
-/*    -webkit-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -opera-transform: rotate(360deg);*/
 }
 
 
@@ -71,9 +68,43 @@ body{
 }
 
 #exp-input{
-    width: 228px;
+    width: 223px;
     padding-left: 10px;
     outline: none;
     float: left;
     color: white;
+    margin-left: 5px;
+}
+#exp-input2{
+    width: 223px;
+    padding-left: 10px;
+    outline: none;
+    float: left;
+    color: white;
+    margin-left: 5px;
+}
+#calc2{
+    margin-left: 200px;
+}
+
+#calc2 input{
+    border-radius: 0px;
+}
+#calc2 input{
+    border: none;
+    background-color: #ccc;
+    outline: none;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    -webkit-transition: all 0.8s 0.1s ease;
+    -moz-transition: all 0.8s 0.1s ease;
+    -o-transition: all 0.8s 0.1s ease-in;
+}
+
+#calc2 input.num:hover{
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -opera-transform: rotate(360deg);
 }

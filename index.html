@@ -6,10 +6,36 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
 <!--        <script type="text/javascript" src="http://scriptjava.net/source/scriptjava/scriptjava.js"></script>-->
         <script type="text/javascript">
+            if(document.getElementsByClassName) {
+                    getElementsByClass = function(classList, node) {    
+                            return (node || document).getElementsByClassName(classList)
+                    }
+
+            } else {
+
+                    getElementsByClass = function(classList, node) {			
+                            var node = node || document,
+                            list = node.getElementsByTagName('*'), 
+                            length = list.length,  
+                            classArray = classList.split(/\s+/), 
+                            classes = classArray.length, 
+                            result = [], i,j
+                            for(i = 0; i < length; i++) {
+                                    for(j = 0; j < classes; j++)  {
+                                            if(list[i].className.search('\\b' + classArray[j] + '\\b') != -1) {
+                                                    result.push(list[i])
+                                                    break
+                                            }
+                                    }
+                            }
+
+                            return result
+                    }
+            }
+
             function Calculator(outputElement) {
                 this.outputElement = outputElement;
                 this.stack = new Array(0);
-                this.trigger = false;
 
                 this.showResult = function(result) {
                     this.outputElement.value = result;
@@ -42,7 +68,6 @@
                         this.stack[0] = res;
                     }
                     return this.stack[0];
-                    this.trigger = true;
                 };
 
                 this.clearInputValue = function() {
@@ -56,14 +81,31 @@
                     this.stack.splice(0, 1);
                 };
             }
-//            $$r(function() {
-//                c = new Calculator(document.getElementById('exp-input'), document.getElementById('exp-input2'), document.getElementById('exp-input3'));
-//            });
             window.onload = function(){
-                c = new Calculator(document.getElementById('exp-input'));
+                var arr = ["exp-input", "exp-input2"];
+                var arrTable = ["left-col", "right-col"];
+//                arrObj[0] = new Calculator(document.getElementById('exp-input'));
+//                arrObj[1] = new Calculator(document.getElementById('exp-input2'));
+                var arrObj = [];
+                
+                for (var i = 0; i < arr.length; i++) {
+                    arrObj[i] = new Calculator(document.getElementById(arr[i]));
+                    var div = document.getElementById(arrTable[i]);
+                    var elements = document.getElementsByClassName('num', div);
+                    for (var j = 0; j < elements.length; j++) {
+//                        alert(i);
+                        elements[j].onclick = function(){arrObj[i].outputElement.value += this.value;};
+//                        elements[j].onclick = function(){getValue(this.value);};
+                    }
+                }
+                alert(arrObj);
             }
+            alert(arrObj);
             function getValue(value){
                 c.outputElement.value += value;
+            }
+            function getValue2(value){
+                c2.outputElement.value += value;
             }
         </script>
     </head>
@@ -83,7 +125,7 @@
                         <td><input type="button" value="6" class="num" onclick="getValue(this.value)" /></td>
                     </tr>
                     <tr>
-                        <td><input type="button" value="1" class="num" onclick="getValue(this.value)" /></td>
+                        <td><input type="button" value="1" class="num"  /></td>
                         <td><input type="button" value="2" class="num" onclick="getValue(this.value)"/></td>
                         <td><input type="button" value="3" class="num" onclick="getValue(this.value)" /></td>
                     </tr>
@@ -105,6 +147,47 @@
                     <tr>
                         <td><input type="button" class="large" value="+" onclick="c.onOperation(this.value)"/></td>
                         <td><input type="button" class="large" value="=" onclick="c.onCalculate()"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="calc-block" id="calc2">
+            <input type="text" id="exp-input2" value="" readonly/>
+            <table id="left-col">
+                <tbody>
+                    <tr>
+                        <td><input type="button" value="7" class="num"  /></td>
+                        <td><input type="button" value="8" class="num"  /></td>
+                        <td><input type="button" value="9" class="num"  /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="4" class="num"  /></td>
+                        <td><input type="button" value="5" class="num"  /></td>
+                        <td><input type="button" value="6" class="num"  /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="1" class="num"  /></td>
+                        <td><input type="button" value="2" class="num" /></td>
+                        <td><input type="button" value="3" class="num"  /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" id="null" class="large num" value="0"  /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table id="right-col">
+                <tbody>
+                    <tr>
+                        <td><input type="button" value="C" onclick="c2.clearInputValue()"/></td>
+                        <td><input type="button" value="*" onclick="c2.onOperation(this.value)" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="-" onclick="c2.onOperation(this.value)" /></td>
+                        <td><input type="button" value="/" onclick="c2.onOperation(this.value)" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" class="large" value="+" onclick="c2.onOperation(this.value)"/></td>
+                        <td><input type="button" class="large" value="=" onclick="c2.onCalculate()"/></td>
                     </tr>
                 </tbody>
             </table>
