@@ -37,6 +37,7 @@ input{
     -webkit-transition: all 0.8s 0.1s ease;
     -moz-transition: all 0.8s 0.1s ease;
     -o-transition: all 0.8s 0.1s ease-in;
+    -ms-transition: all 0.8s 0.1s ease-in;
 }
 
 input:hover{
@@ -101,6 +102,7 @@ body{
     -webkit-transition: all 0.8s 0.1s ease;
     -moz-transition: all 0.8s 0.1s ease;
     -o-transition: all 0.8s 0.1s ease-in;
+    -ms-transition: all 0.8s 0.1s ease-in;
 }
 
 #calc2 input.num:hover{
