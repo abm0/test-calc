@@ -6,29 +6,29 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
 <!--        <script type="text/javascript" src="http://scriptjava.net/source/scriptjava/scriptjava.js"></script>-->
         <script type="text/javascript">
-            if(document.getElementsByClassName) {
-                    getElementsByClass = function(classList, node) {    
-                            return (node || document).getElementsByClassName(classList)
-                    }
-            } else {
-                    getElementsByClass = function(classList, node) {			
-                            var node = node || document,
-                            list = node.getElementsByTagName('*'), 
-                            length = list.length,  
-                            classArray = classList.split(/\s+/), 
-                            classes = classArray.length, 
-                            result = [], i,j
-                            for(i = 0; i < length; i++) {
-                                    for(j = 0; j < classes; j++)  {
-                                            if(list[i].className.search('\\b' + classArray[j] + '\\b') != -1) {
-                                                    result.push(list[i])
-                                                    break
-                                            }
-                                    }
-                            }
-                            return result
-                    }
-            }
+//            if(document.getElementsByClassName) {
+//                    getElementsByClass = function(classList, node) {    
+//                            return (node || document).getElementsByClassName(classList)
+//                    }
+//            } else {
+//                    getElementsByClass = function(classList, node) {			
+//                            var node = node || document,
+//                            list = node.getElementsByTagName('*'), 
+//                            length = list.length,  
+//                            classArray = classList.split(/\s+/), 
+//                            classes = classArray.length, 
+//                            result = [], i,j
+//                            for(i = 0; i < length; i++) {
+//                                    for(j = 0; j < classes; j++)  {
+//                                            if(list[i].className.search('\\b' + classArray[j] + '\\b') != -1) {
+//                                                    result.push(list[i])
+//                                                    break
+//                                            }
+//                                    }
+//                            }
+//                            return result
+//                    }
+//            }
             function Calculator(outputElement) {
                 this.outputElement = outputElement;
                 this.stack = new Array(0);
@@ -81,6 +81,7 @@
 //                var arr = ["exp-input", "exp-input2"];
 //                var arrTable = ["calc1", "calc2"];               
 //                var obj = [];
+////                var obj;
 //                for (var i = 0; i < arr.length; i++) {
 //                    obj[i] = new Calculator(document.getElementById(arr[i]));
 //                    var div = document.getElementById(arrTable[i]);
@@ -96,7 +97,6 @@
                 c = new Calculator(document.getElementById('exp-input'));
                 c2 = new Calculator(document.getElementById('exp-input2'));
             }
-
             function getValue(value){
                 c.outputElement.value += value;
             }
